@@ -1,0 +1,49 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- production version, optimized for size and speed -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+	<title>Marquee</title>
+</head>
+<body>
+	<div id="app">
+		<h3>{{ msg }}</h3>
+		<p>滚动时间间隔：{{ interval }}ms</p>
+		<input type="button" @click="move" value="浪">
+		<input type="button" @click="stop" value="猥琐">
+	</div>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				msg:'猥琐发育，别浪！！～～～',
+				interverId: null,
+				interval: 1000
+			},
+			methods:{
+				move(){
+					if(this.interverId==null){
+						this.interverId = setInterval(() => {
+							this.msg = this.msg.substring(1) + this.msg.substring(0,1)
+						}, this.interval);
+					}else{
+						clearInterval(this.interverId)
+						this.interverId = null
+						this.interval /= 2
+						this.interverId = setInterval(() => {
+							this.msg = this.msg.substring(1) + this.msg.substring(0,1)
+						}, this.interval)
+					}
+					console.log(this.interval)
+				},
+				stop(){
+					clearInterval(this.interverId)
+					this.interverId = null
+					this.interval = 1000
+				}
+			}
+		})
+	</script>
+</body>

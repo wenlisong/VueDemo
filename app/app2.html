@@ -1,0 +1,40 @@
+<html>
+<head>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- production version, optimized for size and speed -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+	<title>app2</title>
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+		input {
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p v-cloak>{{ msg }}+++++++</p>
+		<h4 v-text='msg'>=====</h4>
+		<div v-html='msg2'></div>
+		
+		<input type="button" v-bind:title="mytitle" v-on:click="show" value="button">
+	</div>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				msg:'123',
+				msg2: '<h2>This is h2.</h2>',
+				mytitle: 'This is my title',
+			},
+			methods:{
+				show: function(){
+					alert('Hello')
+				}
+			}
+		})
+	</script>
+</body>
