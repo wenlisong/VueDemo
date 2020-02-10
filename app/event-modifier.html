@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Event Modifier</title>
+    <style>
+        .inner{
+            height: 80px;
+            background-color: lightcyan;
+        }
+        .outer{
+            padding: 30px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click="divHandler">
+            <!-- 使用 .stop 组织冒泡 -->
+            <input type="button" value="Press" @click.stop="buttonHandler">
+        </div>
+        
+        <!-- .prevent 阻止默认行为， 不跳转 -->
+        <a href="https://www.baidu.com" @click.prevent="linkClick">Baidu</a>
+        
+        <!-- .capture 从外往里执行 -->
+        <div class="inner" @click.capture="divHandler">
+            <input type="button" value="Press" @click="buttonHandler">
+        </div>
+        
+        <!-- .self 只有点击当前元素才会触发事件 -->
+        <div class="inner" @click.self="divHandler">
+            <input type="button" value="Press" @click="buttonHandler">
+        </div>
+
+        <!-- .once 只触发一次事件 -->
+        <a href="https://www.baidu.com" @click.prevent.once="linkClick">Baidu</a>
+
+        <!-- .stop 和 .self 区别 -->
+        <div class="outer" @click="div2Handler">
+            <div class="inner" @click="divHandler">
+                <input type="button" value="Press" @click.stop="buttonHandler">
+            </div>
+        </div>
+        <div class="outer" @click="div2Handler">
+            <div class="inner" @click.self="divHandler">
+                <input type="button" value="Press" @click="buttonHandler">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{
+                divHandler(){
+                    console.log('this is div')
+                },
+                buttonHandler(){
+                    console.log('this is button')
+                },
+                linkClick(){
+                    console.log('this is baidu')
+                },
+                div2Handler(){
+                    console.log('this is div 2')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
