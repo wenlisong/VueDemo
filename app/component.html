@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Component</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-com1></my-com1>
+    </div>
+    <script>
+        // 使用 Vue.extend 创建全局的Vue组件
+        var com1 = Vue.extend({
+            template: '<h3>This is a component created by Vue.extend</h3>'
+        })
+        // 使用Vue.component('组件名称', 创建出来的组件模板对象)
+        // 如果使用 Vue.component 定义全局组件，用驼峰命名，
+        // 在引用的时候需要把大写的驼峰改为小写并加上-连接
+        Vue.component('myCom1', com1)
+
+        var vm = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+</html>
