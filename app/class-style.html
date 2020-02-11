@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Class Style</title>
+  
+  <style>
+    .red{
+      color:red;
+    }
+    
+    .thin{
+      font-weight: 200;
+    }
+    
+    .italic{
+      font-style: italic;
+    }
+    
+    .active{
+      letter-spacing: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 class="thin italic red">这是h1标签</h1>
+    
+    <!-- 绑定 -->
+    <h1 :class="['thin','italic', flag?'active':'']">这是h1标签</h1>
+    
+    <!-- 使用 对象 代替 三元表达式 -->
+    <h1 :class="[{'active':flag}]">这是h1标签</h1>
+    
+    <h1 :class="classObj">这是h1标签</h1>
+
+    <!-- 对象是无序键值对集合 -->
+    <h1 :style="{color:'red', 'font-weight':200}">这是h1标签</h1>
+    <h1 :style="styleObj1">这是h1标签</h1>
+    <h1 :style="[styleObj1, styleObj2]">这是h1标签</h1>
+    
+  </div>
+  
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: true,
+        classObj: {red:true, thin:true, italic: false, active: false},
+        styleObj1: {color:'red', 'font-weight':200},
+        styleObj2: {'font-style': 'italic'},
+
+      }
+    })
+  </script>
+</body>
+</html>
