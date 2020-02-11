@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Simple Calculator</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div id="app">
+    <input type="text" v-model='n1' style="width: 10%;">
+    
+    <select v-model="opt">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" v-model='n2' style="width: 10%;">
+    <input type="button" value="=" @click='calc'>
+    <input type="text" v-model='rst' style="width: 10%;">
+
+	</div>
+	
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data:{
+        n1: 0,
+        opt: '+',
+        n2: 0,
+        rst: 0,
+      },
+      methods:{
+        calc(){
+          // switch (this.opt) {
+          //   case '+':
+          //     this.rst = parseInt(this.n1) + parseInt(this.n2)
+          //     break;
+          //   case '-':
+          //     this.rst = parseInt(this.n1) - parseInt(this.n2)
+          //     break;
+          //   case '*':
+          //     this.rst = parseInt(this.n1) * parseInt(this.n2)
+          //     break;
+          //   case '/':
+          //     this.rst = parseInt(this.n1) / parseInt(this.n2)
+          //     break;
+          // }
+          this.rst = eval(parseInt(this.n1) + this.opt + parseInt(this.n2))
+        }
+      }
+      
+		})
+	</script>
+</body>
+</html>
