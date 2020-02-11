@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>V-Model</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>{{ msg }}</p>
+
+		<!-- v-bind 只能实现数据单向绑定， 从 Model 到 View -->
+		<!-- v-model 可以实现数据双向绑定，
+					但是只能用在表单元素中， 例如 input select checkbox textarea-->
+		<input type="text" v-model='msg' style="width: 30%;">
+	</div>
+	
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data:{
+				msg: '这是一条消息。'
+			}
+		})
+	</script>
+</body>
+</html>
