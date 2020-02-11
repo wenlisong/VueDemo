@@ -24,23 +24,49 @@
     <p v-for="(val, key, i) in user">value: {{val}} --- key: {{ key }} --- index: {{i}}</p>
 
     <!-- 4. numbers iteration -->
-    <p v-for="count in 10">This is {{count}}-th loop</p>
+    <p v-for="count in 5">This is {{count}}-th loop</p>
+
+    <!--  -->
+    <div>
+      <label>id:
+        <input type="text" v-model="id">
+      </label>
+
+      <label>name:
+        <input type="text" v-model="name">
+      </label>
+
+      <button @click="add">add</button>
+    </div>
+    <p v-for="item in list3" :key="item.id">
+      <input type="checkbox">{{item.id}} --- {{item.name}}
+    </p>
   </div>
   <script>
     var vm = new Vue({
       el: '#app',
       data:{
-        list: [1,2,3,4,5],
+        list: [1,2,3,4],
         list2: [
           {id:1, name:'zs1'},
           {id:2, name:'zs2'},
           {id:3, name:'zs3'},
-          {id:4, name:'zs4'},
         ],
         user:{
           id:1,
           name: 'tony',
           gender: 'male',
+        },
+        id: '',
+        name: '',
+        list3:[
+          {id:1, name:'嬴政'},
+          {id:2, name:'李斯'},
+        ],
+      },
+      methods:{
+        add(){
+          this.list3.unshift({id:this.id, name:this.name})
         }
       }
     })
