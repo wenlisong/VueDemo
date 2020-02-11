@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>V For</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <p>{{ list[0] }}</p>
+    <p>{{ list[1] }}</p>
+    <p>{{ list[2] }}</p>
+    <p>{{ list[3] }}</p>
+    <p>{{ list[4] }}</p> -->
+
+    <!-- 1. array for loop -->
+    <p v-for="(item, i) in list">index: {{ i }} --- item: {{ item }}</p>
+
+    <!-- 2. object array for loop -->
+    <p v-for="(user, i) in list2">id: {{ user.id }} --- name: {{ user.name }} --- index: {{ i }}</p>
+
+    <!-- 3. object for loop -->
+    <p v-for="(val, key, i) in user">value: {{val}} --- key: {{ key }} --- index: {{i}}</p>
+
+    <!-- 4. numbers iteration -->
+    <p v-for="count in 10">This is {{count}}-th loop</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data:{
+        list: [1,2,3,4,5],
+        list2: [
+          {id:1, name:'zs1'},
+          {id:2, name:'zs2'},
+          {id:3, name:'zs3'},
+          {id:4, name:'zs4'},
+        ],
+        user:{
+          id:1,
+          name: 'tony',
+          gender: 'male',
+        }
+      }
+    })
+  </script>
+</body>
+</html>
