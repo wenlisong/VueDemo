@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>V For & V Show</title>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="toggle" @click="toggle">
+
+    <!-- v-if 删除对应html元素， 切换性能消耗高-->
+    <h3 v-if="flag">this is the element controlled by v-if</h3>
+    <!-- v-show 更改属性 display: none， 初始渲染消耗高 -->
+    <h3 v-show="flag">this is the element controlled by v-show</h3>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data:{
+        flag: true,
+      },
+      methods:{
+        toggle(){
+          this.flag = !this.flag
+        },
+      },
+    })
+  </script>
+</body>
+</html>
