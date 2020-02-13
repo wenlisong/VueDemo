@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue-resource</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- vue-resource 依赖于Vue 注意导入顺序 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="getRequest" @click="getInfo">
+    <br>
+    <input type="button" value="postRequest" @click="postInfo">
+    <br>
+    <input type="button" value="jsonpRequest" @click="jsonpInfo">
+  </div>
+  <script>
+    var vm = new Vue({
+      el:'#app',
+      data:{},
+      methods:{
+        getInfo(){
+          this.$http.get('https://yesno.wtf/api').then(function(result){
+            console.log(result.body)
+          })
+        },
+        postInfo(){
+          this.$http.post('URL', {}, {emulateJSON: true}).then(function(result){
+            console.log(result.body)
+          })
+        },
+        jsonpInfo(){
+          this.$http.jsonp('url').then(result => {
+            console.log(result.body)
+          })
+        }
+      },
+    })
+  </script>
+</body>
+</html>
