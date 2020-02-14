@@ -23,7 +23,7 @@
           <label>
             Name:<input type="text" class="form-control">
           </label>
-          <input type="button" value="添加" @click="add">
+          <input type="button" value="添加" @click="add" class="form-control">
         </div>
     </div>
     
@@ -42,13 +42,18 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.ctime}}</td>
-          <td><a href="">删除</a></td>
+          <td><a href="" @click.prevent="del(item.id)">删除</a></td>
         </tr>
       </tbody>
     </table>
     
   </div>
   <script>
+    // 全局配置数据接口根域
+    Vue.http.options.root = 'http://vue.studyit.io/'
+    // 全局启用 emulateJSON
+    Vue.http.options.emulateJSON = true
+
     var vm = new Vue({
       el:'#app',
       data:{
@@ -63,7 +68,14 @@
       },
       methods:{
         add(){
-
+          this.$http.post('url',{name:this.name},{emulateJSON:true}).then(result => {
+            if(result.body.status === 0){
+              this.getAllList()
+              this.name = ''
+            }else{
+              alert('添加失败！')
+            }
+          })
         },
         getAllList(){
           this.$http.get('url').then(result => {
@@ -75,7 +87,15 @@
             }
           })
         },
-        del(){},
+        del(id){
+          this.$http.get('url'+id).then(result => {
+            if(result.body.status === 0){
+              this.getAllList()
+            }else{
+              alert('删除失败！')
+            }
+          })
+        },
       },
     })
   </script>
