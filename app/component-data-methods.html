@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Component3</title>
+</head>
+<body>
+  <div id="app">
+    <mycom1></mycom1>
+  </div>
+
+  
+  <script>
+    // 1.组件可以有自己的data
+    // 2.组件的data必须是一个方法，必须返回对象
+    // 3.组件中的data使用方法 和实例中一样
+    Vue.component('mycom1', {
+      template: '<h1>这是的全局组件 --- {{ msg }}</h1>',
+      data: function(){
+        return {
+          msg: 'Data from component'
+        }
+      },
+
+    })
+    
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+    })
+  </script>
+</body>
+</html>
