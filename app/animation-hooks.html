@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+    .ball {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: lightcoral;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="toggle" @click="flag=!flag" class="form-control" style="width: 200px;">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter">
+    <div class="ball" v-show="flag"></div>
+  </transition>
+  
+  
+</div>
+<script>
+  
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      flag: false,
+    },
+    methods:{
+      // 开始动画之前， 起始位置
+      beforeEnter(el){
+        el.style.transform = "translate(0, 0)"
+      },
+      // 动画开始之后
+      enter(el, done){
+        el.offsetWidth
+        el.style.transform = "translate(150px, 450px)"
+        el.style.transition = "all 1s ease"
+
+        done()
+      },
+      afterEnter(el){
+        this.flag = !this.flag
+      }
+    },
+  })
+</script>
+</body>
+</html>
