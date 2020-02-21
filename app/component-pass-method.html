@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Component Pass Method</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 父组件向子组件 传递方法， 使用的是事件绑定机制 v-on -->
+    <com2 v-on:func="show"></com2>
+  </div>
+
+
+  <template id="tmp1">
+    <div>
+      <h1>这是子组件</h1>
+      <input type="button" value="子组件按钮 触发父组件的func方法" @click="myclick">
+    </div>
+  </template>
+  
+  <script>
+
+    var com2 = {
+      template: '#tmp1',
+      data(){
+        return {
+          sonmsg: { name: '小头儿子', age:6}
+        }
+      },
+      methods:{
+        myclick(){
+          this.$emit('func', this.sonmsg)
+        }
+      }
+    }
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        datamsgFromSon: null
+      },
+      methods: {
+        show(data){
+          // console.log('调用了父组件的show方法 --- ' + data)
+          // console.log(data)
+          this.datamsgFromSon = data
+        }
+      },
+      components:{
+        com2
+      }
+    })
+  </script>
+</body>
+</html>
