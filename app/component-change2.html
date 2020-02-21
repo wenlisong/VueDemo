@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>component change 2</title>
+</head>
+<body>
+  <div id="app">
+
+  <a href="" @click.prevent="componentName='login'">登录</a>
+  <a href="" @click.prevent="componentName='register'">注册</a>
+
+   <component :is="componentName"></component>
+   
+  </div>
+
+  
+  <script>
+    Vue.component('login', {
+      template: '<h3>登录组件</h3>'
+    })
+    Vue.component('register', {
+      template: '<h3>注册组件</h3>'
+    })
+    
+    var vm = new Vue({
+      
+      el: '#app',
+      data: {
+        componentName: 'login',
+      },
+      methods: {},
+    })
+  </script>
+</body>
+</html>
