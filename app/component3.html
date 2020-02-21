@@ -10,12 +10,21 @@
   <div id="app">
     <mycom3></mycom3>
   </div>
+
+  <div id="app2">
+    <mycom3></mycom3>
+    <login></login>
+  </div>
   
   <template id="tmp1">
     <div>
       <h1>这是通过 template 元素， 在外部定义的组件结构，这个方式，有代码的只能提示和高亮</h1>
       <h4>good</h4>
     </div>
+  </template>
+
+  <template id="tmp12">
+    <h1>这是私有的 login 组件</h1>
   </template>
   
   <script>
@@ -25,6 +34,31 @@
     
     var vm = new Vue({
       el: '#app',
+      data: {},
+      methods: {},
+    })
+
+    var vm2 = new Vue({
+      el: '#app2',
+      data: {},
+      methods: {},
+      filters:{},
+      directives:{},
+      components:{
+        // 定义实例内部私有组件
+        login:{
+          template: '#tmp12'
+        }
+      },
+
+      beforeCreate(){},
+      created(){},
+      beforeMount(){},
+      mounted(){},
+      beforeUpdate(){},
+      updated(){},
+      beforeDestroy(){},
+      destroyed(){}
     })
   </script>
 </body>
