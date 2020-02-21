@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Component Pass Data</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 通过 v-bind 把父组件数据传递到子组件 -->
+    <com1 v-bind:parentmsg="msg"></com1>
+  </div>
+
+  
+  <script>
+ 
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '123 父组件的数据'
+      },
+      methods: {},
+
+      components:{
+        // 子组件 默认不能访问 父组件 的 data 和 methods
+        com1:{
+          data(){
+            // 私有数据 可读可写
+            return {
+              title: '123',
+              content: 'asdfb',
+            }
+          },
+          template: '<h1 @click="change">子组件 --- {{ parentmsg }}</h1>',
+          // 父组件的属性必须先在 props 定义
+          // 只读 不可写
+          props: ['parentmsg'],
+          methods: {
+            change(){
+              this.parentmsg = '被修改了'
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
