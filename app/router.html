@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Router</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+  <div id="app">
+    <h1>Hello App!</h1>
+    <p>
+      <a href="#/login">a-login</a>
+      <a href="#/register">a-register</a>
+    </p>
+    <p>
+      <!-- use router-link component for navigation. -->
+      <!-- specify the link by passing the `to` prop. -->
+      <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+      <router-link to="/login" tag="span">routerlink-Login</router-link>
+      <router-link to="/register">routerlink-Register</router-link>
+    </p>
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
+  </div>
+
+  <script>
+
+    var login = {
+      template: '<h1>Login Component</h1>'
+    }
+    var register = {
+      template: '<h1>Register Component</h1>'
+    }
+
+    var routerObj = new VueRouter({
+      routes: [
+        // { path: '/', component: login},
+        { path: '/', redirect: '/login'},
+        { path: '/login', component: login},
+        { path: '/register', component: register }
+      ]
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data:{},
+      methods:{},
+      router: routerObj,
+    })
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
