@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.4.10/dist/g2.min.js"></script>
+  <script src="https://unpkg.com/@antv/data-set"></script> -->
+  
+  <style>
+    .g2-guide-html {
+      width: 100px;
+      height: 80px;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 0.2;
+    }
+    
+    .g2-guide-html .title {
+      font-size: 12px;
+      color: #8c8c8c;
+      font-weight: 300;
+    }
+    
+    .g2-guide-html .value {
+      font-size: 32px;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+  
+  <style>
+    .整体{width: 38px;height: 44px; background-color:#FAE0E0;border: 1px #ffffff solid;border-radius:4px;padding: 4px;position: absolute;}
+    .项目分布容器{width: 34px;position: absolute;}
+    .项目分布上{width: 14px;height: 4px;background-color: #EA7049;border-radius:4px;}
+    .项目分布左{width: 4px;height: 14px;background-color: #EA7049;border-radius:4px;position: absolute;left: 0;right: 0;top: 0;;}
+    .项目分布颜色补充{width: 8px;height: 4px;background-color: #EA7049;}
+    .下容器{width: 30px;height: 34px;background-color: #38C3A5;margin: 0 auto;margin-top: 4px;border-radius:4px;z-index: 10;
+      position: absolute;right: 6px;overflow: hidden;border: 1px solid #fff;;}
+    .图标容器{float:left;font-size:0.5rem;line-height: 30px;margin-left: 7px;}
+    .使用率容器{float: right;}
+    .使用率样式{width: 6px;height: 6px;background-color: #638BEB;border-left: 1px solid #fff;border-bottom: 1px solid #fff;;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <input type="button" value="饼图" @click="getPieChart"> -->
+      <!-- <div id="container"></div> -->
+
+      <h3>工位</h3>
+      <div>
+        <select v-model="workerType">
+          <option v-for="option in workerTypes" v-bind:value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <span>Selected: {{ workerType }}</span>
+        <br>
+        <select v-model="useType">
+          <option v-for="option in useTypes" v-bind:value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <span>Selected: {{ useType }}</span>
+        <br>
+        <select v-model="project">
+          <option v-for="option in projects" v-bind:value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <span>Selected: {{ project }}</span>
+        <br>
+        <select v-model="seatUse">
+          <option v-for="option in seatUses" v-bind:value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <span>Selected: {{ seatUse }}</span>
+        <br>
+      </div>
+      <div class="整体" >
+        <div class="项目分布容器">
+          <div class="项目分布上" :style="{ backgroundColor:project }"></div>
+          <div class="项目分布颜色补充" :style="{ backgroundColor:project }"></div>
+          <div class="项目分布左" :style="{ backgroundColor:project }"></div>
+        </div>
+        <div class="下容器" :style="{ backgroundColor:useType }">
+          <div class="图标容器"><i>标</i></div>
+          <div  class="使用率容器">
+            <div class="使用率样式" :style="{ backgroundColor:seatUse[4] }"></div>
+            <div class="使用率样式" :style="{ backgroundColor:seatUse[3] }"></div>
+            <div class="使用率样式" :style="{ backgroundColor:seatUse[2] }"></div>
+            <div class="使用率样式" :style="{ backgroundColor:seatUse[1] }"></div>
+            <div class="使用率样式" :style="{ backgroundColor:seatUse[0] }"></div>	
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data:{
+          workerType: '',
+          workerTypes: [
+            { text: '自有人员', value: 'worker1' },
+            { text: '借调人员', value: 'worker2' },
+            { text: '外包人员', value: 'worker3' },
+            { text: '项目外包', value: 'worker4' },
+            { text: '访客', value: 'worker5' },
+          ],
+          useType: '',
+          useTypes: [
+            { text: '空置', value: 'white' },
+            { text: '使用中', value: 'green' },
+            { text: '已预订', value: 'yellow' },
+          ],
+          project: '',
+          projects: [
+            { text: '项目一', value: 'orange' },
+            { text: '项目二', value: 'lightblue' },
+          ],
+          seatUse: [],
+          seatUses: [
+            { text: '0%', value: ['white','white','white','white','white'] },
+            { text: '20%', value: ['red','white','white','white','white'] },
+            { text: '40%', value: ['litghtyellow','litghtyellow','white','white','white'] },
+            { text: '60%', value: ['yellow','yellow','yellow','white','white'] },
+            { text: '80%', value: ['orange','orange','orange','orange','white'] },
+            { text: '100%', value: ['blue','blue','blue','blue','blue'] },
+          ]
+        },
+        methods:{
+          // getPieChart(){
+          //   const data = [
+          //   { type: '评估中', percent: 0.23 },
+          //   { type: '设计中', percent: 0.28 },
+          //   { type: '正在开发', percent: 0.30 },
+          //   { type: '已上线', percent: 0.09 },
+          //   { type: 'a', percent:0.1},
+          //   { type: 'b', percent:0.1},
+          //   ];
+          //   data[0].type += data[0].percent
+          //   const sum = 500;
+          //   const ds = new DataSet();
+          //   const dv = ds.createView().source(data);
+          //   dv.transform({
+          //     type: 'map',
+          //     callback(row) {
+          //       row.value = parseInt(sum * row.percent);
+          //       return row;
+          //     }
+          //   });
+          //   const chart = new G2.Chart({
+          //     container: 'container',
+          //     forceFit: true,
+          //     height: 500,
+          //     padding: 'auto'
+          //   });
+          //   chart.source(dv);
+          //   chart.tooltip(false);
+          //   chart.legend({
+          //     position: 'right-center',
+          //     offsetX: -100
+          //   });
+          //   chart.coord('theta', {
+          //     radius: 0.75,
+          //     innerRadius: 0.6
+          //   });
+          //   chart.intervalStack().position('percent').color('type', [ '#0a7aca', '#0a9afe', '#4cb9ff', '#8ed1ff','red', 'green' ])
+          //   .opacity(1)
+          //   .label('percent', {
+          //     offset: -18,
+          //     textStyle: {
+          //       fill: 'white',
+          //       fontSize: 12,
+          //       shadowBlur: 2,
+          //       shadowColor: 'rgba(0, 0, 0, .45)'
+          //     },
+          //     rotate: 0,
+          //     autoRotate: false,
+          //     formatter: (text, item) => {
+          //       return String(parseInt(item.point.percent * 100)) + '%';
+          //     }
+          //   });
+          //   chart.guide().html({
+          //     position: [ '50%', '50%' ],
+          //     html: '<div class="g2-guide-html"><p class="title">项目总计</p><p class="value">500</p></div>'
+          //   });
+          //   chart.on('interval:mouseenter', function(ev) {
+          //     const data = ev.data._origin;
+          //     $('.g2-guide-html').css('opacity', 1);
+          //     $('.g2-guide-html .title').text(data.type);
+          //     $('.g2-guide-html .value').text(data.value);
+          //   });
+            
+          //   chart.on('interval:mouseleave', function() {
+          //     $('.g2-guide-html .title').text('项目总计');
+          //     $('.g2-guide-html .value').text(500);
+          //   });
+          //   chart.render();
+          // },
+        },
+        })
+      </script>
+    </body>
+    </html>
