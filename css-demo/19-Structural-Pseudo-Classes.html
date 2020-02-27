@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structural Pseudo-Classes</title>
+  <style>
+    /* 匹配第一个孩子 */
+    /* .box ul li:first-child {
+      color: #f00;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #000;
+    } */
+    /* 匹配最后一个孩子 */
+    /* .box ul li:last-child{
+      color: #f00;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #000;
+    } */
+    /* 匹配第 n 个孩子 */
+    /* .box ul li:nth-child(2){
+      color: pink;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid skyblue;
+    } */
+    /* 匹配 偶数 个孩子 */
+    /* .box ul li:nth-child(2n){
+      color: pink;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid skyblue;
+    } */
+    .box ul li:nth-child(even) {
+      color: #f00;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid skyblue;
+      list-style-type: none;
+      text-decoration: line-through;
+    }
+    /* 匹配只有 唯一孩子 的元素 */
+    .box ul li:only-child{
+      width: 200px;
+      background-color: cyan;
+    }
+
+    table tr:nth-child(2n){
+      background-color: aqua;
+    }
+    table tr:nth-child(2n+1){
+      background-color: azure;
+    }
+    table td:hover{
+      background-color: #f00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <ul>
+      <li>options1</li>
+      <li>options2</li>
+      <li>options3</li>
+      <li>options4</li>
+      <li>options5</li>
+      <li>options6</li>
+      <li>options7</li>
+      <li>options8</li>
+      <li>options9</li>
+      <li>options10</li>
+    </ul>
+    <ul>
+      <li>onlly child</li>
+    </ul>
+  </div>
+  <table width="500" border="1" align="left">
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</body>
+
+</html>
