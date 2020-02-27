@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伪元素</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 40%;
+      margin: 100px auto;
+      font-size: 14px;
+      border: 1px solid #444;
+      color: #333;
+    }
+
+    .box::first-letter {
+      color: #f00;
+      font-size: 40px;
+      padding: 20px;
+    }
+
+    .box::first-line {
+      color: #9f79ee;
+    }
+
+    .box::before {
+      content: "Tencent News ";
+    }
+
+    .box::after{
+      content: " Bye!";
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">新华社北京2月26日电（记者吴雨）中国人民银行26日表示，
+    增加再贷款再贴现专用额度5000亿元，同时下调支农、支小再贷款利率0.25个百分点至2.5%。
+    人民银行系统要把再贷款再贴现快速精准落实到位，为企业有序复工复产提供低成本、
+    普惠性的资金支持，切实解决企业复工复产面临的债务偿还、资金周转和扩大融资等迫切问题。</div>
+</body>
+
+</html>
