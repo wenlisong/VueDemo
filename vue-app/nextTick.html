@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$nextTick</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{ msg }}
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: 'One'
+        }
+      },
+      mounted() {
+        this.msg = 'Two';
+
+        // 改变成Three后渲染到浏览器
+        // microtask
+        // this.$nextTick(() => {
+        //   this.msg = 'Three';
+        // });
+
+        // task
+        // Two渲染到浏览器后改编成Three
+        setTimeout(() => {
+          this.msg = 'Three';
+        });
+      }
+    })
+  </script>
+</body>
+
+</html>
