@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 行内 -->
+  <input type="button" value="按钮" onclick="alert(123)">
+
+  <!-- 标签中 -->
+  <!-- <script>
+    alert(345)
+  </script> -->
+
+  <!-- 外部文件 -->
+  <script src="./1.js">
+    // 不报错，也不运行
+    alert(789)
+  </script>
+</body>
+</html>
